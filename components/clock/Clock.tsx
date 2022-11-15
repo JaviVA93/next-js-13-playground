@@ -8,8 +8,12 @@ export default function Clock() {
     const [date, setDate] = useState<String>('00:00:00');
 
     function updateTime () {
-        const d = new Date();
-        setDate(`${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`);
+        const d = new Date(),
+            hours = (d.getHours() > 9) ? d.getHours() : `0${d.getHours()}`,
+            minutes = (d.getMinutes() > 9) ? d.getMinutes() : `0${d.getMinutes()}`,
+            seconds = (d.getSeconds() > 9) ? d.getSeconds() : `0${d.getSeconds()}`;
+        
+        setDate(`${hours}:${minutes}:${seconds}`);
     }
 
     useEffect(() => {
