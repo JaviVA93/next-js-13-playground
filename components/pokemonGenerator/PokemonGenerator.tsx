@@ -21,7 +21,7 @@ const getPokemon = async (id: number): Promise<Pokemon | null> => {
         const pokemonsFetch = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
         const pokemonData = await pokemonsFetch.json();
         const pokemonType = pokemonData.types.map(
-            (item, i) => (i < pokemonData.types.length - 1) ? `${item.type.name}, ` : item.type.name
+            (item: { type: { name: string } }, i: number) => (i < pokemonData.types.length - 1) ? `${item.type.name}, ` : item.type.name
         );
         const poke: Pokemon = {
             name: pokemonData.name,
