@@ -5,7 +5,7 @@ import styles from './clock.module.css';
 
 export default function Clock() {
 
-    const [date, setDate] = useState<String>('');
+    const [date, setDate] = useState<String>('00:00:00');
 
     function updateTime () {
         const d = new Date();
@@ -13,6 +13,7 @@ export default function Clock() {
     }
 
     useEffect(() => {
+        updateTime();
         const timerInterval = setInterval(updateTime, 1000);
         
         return () => {
