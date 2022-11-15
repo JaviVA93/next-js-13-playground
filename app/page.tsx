@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Clock from '../components/Clock'
 import styles from './page.module.css'
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
             <p>Deploy your Next.js site to a public URL with Vercel.</p>
           </a>
         </div>
+        <Clock />
       </main>
 
       <footer className={styles.footer}>
