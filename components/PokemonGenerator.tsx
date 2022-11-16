@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './pokemonGenerator.module.css';
+import styles from '../styles/pokemonGenerator.module.css';
 
 const getNumPokemonSpecies = async (): Promise<number> => {
     try {
@@ -42,7 +42,9 @@ export default async function PokemonGenerator() {
     return (
         <div className={styles.container}>
             <h2>PokeGenerator :)</h2>
-            {!pokemon ? 'NO DATA' :
+            {!pokemon ?
+                <span>Error generating the pokemon, please refresh.</span>
+                :
                 <div className={styles.pokemonInfo}>
                     <Image src={pokemon.imageUrl} alt={pokemon.name} width={200} height={200} />
                     <span>Name:</span>
