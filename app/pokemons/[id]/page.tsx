@@ -1,16 +1,5 @@
 import Image from 'next/image';
-import styles from '../styles/pokemonGenerator.module.css';
 
-const getNumPokemonSpecies = async (): Promise<number> => {
-    try {
-        const pokemonsFetch = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=1');
-        const pokemonsFetchData = await pokemonsFetch.json();
-        return pokemonsFetchData.count;
-    } catch (e) {
-        console.error(e);
-        return 0;
-    }
-}
 type Pokemon = {
     name: string,
     type: string,
@@ -35,22 +24,21 @@ const getPokemon = async (id: number): Promise<Pokemon | null> => {
     }
 }
 
-export default async function PokemonGenerator() {
-    const numPokemons = await getNumPokemonSpecies();
-    const randomId = Math.floor(Math.random() * (numPokemons - 1) + 1);
-    const pokemon = await getPokemon(randomId);
+export default async function pokemonInfo({ params }: { params: any }) {
+    const { id } = params;
+    const pokemonData = await getPokemon(id);
+
     return (
-        <div className={styles.container}>
-            <h2>This is your random pokemon :)</h2>
-            {!pokemon ?
+        <div>
+            {!pokemonData ?
                 <span>Error generating the pokemon, please refresh.</span>
                 :
-                <div className={styles.pokemonInfo}>
-                    <Image src={pokemon.imageUrl} alt={pokemon.name} width={200} height={200} />
+                <div>
+                    <Image src={pokemonData.imageUrl} alt={pokemonData.name} width={200} height={200} />
                     <span>Name:</span>
-                    <span>{pokemon.name}</span>
+                    <span>{pokemonData.name}</span>
                     <span>Type:</span>
-                    <span>{pokemon.type}</span>
+                    <span>{pokemonData.type}</span>
                 </div>
             }
         </div>

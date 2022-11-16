@@ -8,6 +8,9 @@ const links = [
     }, {
       label: 'Clock',
       route: '/clock'
+    }, {
+      label: 'Pokemons',
+      route: '/pokemons'
     }
     
   ]
