@@ -6,7 +6,6 @@ export default async function PokemonsPage() {
         <div>
             {/* @ts-expect-error Server Component */}
             <PokemonGenerator />
-            {/* @ts-expect-error Server Component */}
             <PokemonList />
         </div>
         

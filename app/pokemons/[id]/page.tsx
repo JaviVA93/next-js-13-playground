@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Pokemon = {
     name: string,
@@ -33,7 +34,7 @@ export default async function pokemonInfo({ params }: { params: any }) {
             {!pokemonData ?
                 <span>Error generating the pokemon, please refresh.</span>
                 :
-                <div>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
                     <Image src={pokemonData.imageUrl} alt={pokemonData.name} width={200} height={200} />
                     <span>Name:</span>
                     <span>{pokemonData.name}</span>
@@ -41,6 +42,9 @@ export default async function pokemonInfo({ params }: { params: any }) {
                     <span>{pokemonData.type}</span>
                 </div>
             }
+            <Link href={'/pokemons'}>
+                <button>Go back</button>
+            </Link>
         </div>
     )
 }

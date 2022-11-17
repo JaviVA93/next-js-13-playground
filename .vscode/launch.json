@@ -5,6 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Start Dev App",
+            "runtimeArgs": ["run-script", "dev"],
+            "env": {
+                "BROWSER": "none"
+            },
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "type": "node"
+        },
+        {
             "type": "msedge",
             "request": "launch",
             "name": "Launch Edge against localhost",

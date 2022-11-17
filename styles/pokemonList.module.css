@@ -1,0 +1,30 @@
+.pagination {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination li {
+    cursor: pointer;
+}
+
+.pagination li[selected] {
+    text-decoration: underline;
+}
+
+.pagination li:hover {
+    font-size: 1.2rem;
+}
+
+.pokemonList {
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemonList li:hover {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
