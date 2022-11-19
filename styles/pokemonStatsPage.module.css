@@ -1,5 +1,26 @@
+.container * {
+    padding: 0;
+    margin: 0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(53, 53, 53);
+    padding: 15px;
+    border-radius: 5px;
+}
 .container table {
+    width: 100%;
     border-collapse: collapse;
+}
+.container .stats {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .container table tbody td{
     border: solid 1px rgb(216, 216, 216);

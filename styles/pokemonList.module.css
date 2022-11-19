@@ -29,6 +29,7 @@
 
 .pokemonList li {
     width: fit-content;
+    margin-top: 5px;
 }
 
 .pokemonList li > span {

@@ -50,7 +50,7 @@ export default async function pokemonInfo({ params }: { params: any }) {
             {!pokemonData ?
                 <span>Error generating the pokemon, please refresh.</span>
                 :
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className={styles.stats}>
                     <Image src={pokemonData.imageUrl} alt={pokemonData.name} width={200} height={200} />
                     <table>
                         <tbody>
