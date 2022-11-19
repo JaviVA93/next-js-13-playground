@@ -1,10 +1,13 @@
 .pagination {
-    padding: 0;
-    margin: 0;
     list-style: none;
+
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
+    
+    padding: 0;
+    margin: 0;
 }
 
 .pagination li {
@@ -24,7 +27,15 @@
     flex-direction: column;
 }
 
-.pokemonList li:hover {
+.pokemonList li {
+    width: fit-content;
+}
+
+.pokemonList li > span {
+    margin-right: 5px;
+}
+
+.pokemonList li a:hover{
     font-size: 1.2rem;
     font-weight: 700;
 }

@@ -1,0 +1,10 @@
+.container table {
+    border-collapse: collapse;
+}
+.container table tbody td{
+    border: solid 1px rgb(216, 216, 216);
+}
+
+.container table tbody tr:nth-child(even){
+    background-color: grey;
+}

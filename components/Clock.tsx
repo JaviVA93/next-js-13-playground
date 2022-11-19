@@ -24,7 +24,7 @@ export default function Clock() {
             // Clean when unmount component
             clearInterval(timerInterval);
         }
-    }, [])
+    }, []);
 
     return (
         <div className={styles.container}>

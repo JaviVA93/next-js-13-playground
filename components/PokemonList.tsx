@@ -4,16 +4,23 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from '../styles/pokemonList.module.css';
 
-export default function PokemonList() {
-    const [pokemonList, setPokemonList] = useState<[{ name: string, url: string }] | []>([]);
+export default function PokemonList({ pokemonList }: { pokemonList: any }) {
+    // const [pokemonList, setPokemonList] = useState<[{ name: string, url: string }] | []>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageNumbers, setPageNumbers] = useState<number[] | []>([]);
-
-    const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
-        const req = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=10000');
-        const reqData = await req.json();
-        return reqData.results;
+    // const [pageNumbers, setPageNumbers] = useState<number[] | []>([]);
+    const pokemonsPerPage = 50;
+    const pageNumbers = [];
+    const aux = [];
+    for (let i = 1; i <= Math.ceil(pokemonList.length / pokemonsPerPage); i++) {
+        pageNumbers.push(i);
     }
+    
+
+    // const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
+    //     const req = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=10000', { next: { revalidate: 60*60*24 } });
+    //     const reqData = await req.json();
+    //     return reqData.results;
+    // }
 
     const cleanSelectedPageLi = (parent: Element) => {
         parent.querySelectorAll('li[selected]').forEach(e => {
@@ -28,23 +35,23 @@ export default function PokemonList() {
         setCurrentPage(Number(event.target.id))
     }
 
-    const pokemonsPerPage = 50;
     const renderPageNumbers =
         <ul className={styles.pagination}>
-            {currentPage !== 1 ? <li>Back</li> : ''}
+            {currentPage !== 1 ? <li style={{color: 'grey'}}>Back</li> : ''}
             {pageNumbers?.map(num => {
                 return <li key={num.toString()} id={num.toString()} onClick={clickChangePage}>
                     {num}
                 </li>
             })}
-            {currentPage !== pageNumbers.length ? <li>Next</li> : ''}
+            {currentPage !== pageNumbers.length ? <li style={{color: 'grey'}}>Next</li> : ''}
         </ul>
 
-    const renderPokemonList = pokemonList.length > 0 ? pokemonList?.slice(currentPage - 1, (currentPage - 1) + pokemonsPerPage).map(p => {
+    const renderPokemonList = pokemonList.length > 0 ? pokemonList.slice((currentPage - 1) * pokemonsPerPage, (currentPage - 1) * pokemonsPerPage + pokemonsPerPage).map( (p: {url: string, name: string}) => {
         return (
             <li key={p.url}>
+                <span>{p.name} - </span>
                 <Link href={`/pokemons/${p.url.split('/')[6]}`}>
-                    <span>{p.name}</span>
+                    <span>Check Stats</span>
                 </Link>
             </li>
         )
@@ -52,17 +59,21 @@ export default function PokemonList() {
 
 
     useEffect(() => {
-        getPokemonsList().then(pl => {
-            const aux = [];
-            for (let i = 1; i <= Math.ceil(pl.length / pokemonsPerPage); i++) {
-                aux.push(i);
-            }
-            console.log(aux.length)
-            setPageNumbers(aux);
-            setPokemonList(pl);
-        });
+        // getPokemonsList().then(pl => {
+        //     console.log(`============================ pokemon list length: ${pl.length}`)
+        //     const aux = [];
+        //     for (let i = 1; i <= Math.ceil(pl.length / pokemonsPerPage); i++) {
+        //         aux.push(i);
+        //     }
+        //     setPageNumbers(aux);
+        //     setPokemonList(pl);
+        // });
+        // const aux = [];
+        // for (let i = 1; i <= Math.ceil(pokemonList.length / pokemonsPerPage); i++) {
+        //     aux.push(i);
+        // }
+        // setPageNumbers(aux);
     }, []);
-
 
     return (
         <ul>
