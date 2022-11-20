@@ -166,7 +166,6 @@ export default function Pomodoro() {
 
             setPlayPauseButtonBackground('pause');
 
-            const auxInt = setInterval(updatePomodoro, 250)
             pomoInterval.current = setInterval(updatePomodoro, 250);
         }
     }
