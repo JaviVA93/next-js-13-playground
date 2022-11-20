@@ -1,0 +1,30 @@
+.pomoCard * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.pomoCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: rgb(31, 168, 104);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.pomoTime {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.pomoCard button {
+    border: unset;
+    background-color: rgb(31, 168, 104);
+}
+
+.pomBtnsWrapper {
+    display: flex;
+    gap: 20px;
+}
