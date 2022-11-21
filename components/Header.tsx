@@ -11,8 +11,10 @@ const links = [
     }, {
       label: 'Pokemons',
       route: '/pokemons'
-    }
-    
+    }, {
+      label: 'Videogames',
+      route: '/videogames'
+    },    
   ]
 
 export function Header () {

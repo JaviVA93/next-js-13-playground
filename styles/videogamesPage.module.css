@@ -1,0 +1,15 @@
+.container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container img {
+    width: 400px;
+    height: auto;
+}
+
+.pageTitle {
+    text-align: center;
+    margin: 20px 0;
+}

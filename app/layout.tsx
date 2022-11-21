@@ -1,22 +1,18 @@
-import Link from 'next/link'
 import { Header } from '../components/Header'
 import '../styles/globals.css'
 
-
-export default function RootLayout({ children, }: { children: React.ReactNode}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&display=swap" rel="stylesheet" />
+      </head>
       <body>
         <Header />
         <main>
           {children}
         </main>
-        </body>
+      </body>
     </html>
   )
 }
