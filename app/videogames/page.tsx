@@ -59,8 +59,8 @@ export default async function videogamesPage() {
     const gamesData = (gamesPage) ? gamesPage.results : null;
     console.log(gamesPage)
     return (
-        gamesData ?
-            <GamesList games={gamesData} />
+        gamesPage ?
+            <GamesList gamesPage={gamesPage} />
             :
             <span>Error loading game list.</span>
     )
