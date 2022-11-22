@@ -6,6 +6,7 @@
     gap: 20px;
 }
 .gamesGrid {
+    width: 100%;
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

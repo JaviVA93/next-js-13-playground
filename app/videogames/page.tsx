@@ -56,8 +56,6 @@ async function getFirstGamePage(apiKey: string): Promise<GamesPage | null> {
 export default async function videogamesPage() {
     const rawgApiKey = process.env.RAWG_API_KEY || '';
     const gamesPage = await getFirstGamePage(rawgApiKey);
-    const gamesData = (gamesPage) ? gamesPage.results : null;
-    console.log(gamesPage)
     return (
         gamesPage ?
             <GamesList gamesPage={gamesPage} />
