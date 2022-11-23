@@ -9,7 +9,21 @@
     width: 100%;
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.sortButtons {
+    display: flex;
+    gap: 20px;
+}
+
+.sortButtons button {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgb(83, 83, 83);
+    border: 1px solid rgb(31, 168, 104);
+    border-radius: 5px;
 }
 
 .nextPrevButtons {
@@ -26,7 +40,12 @@
     border-radius: 5px;
 }
 
-.nextPrevButtons button:hover {
+.nextPrevButtons button[disabled] {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(21, 119, 73);
+}
+
+.nextPrevButtons button:not([disabled]):hover {
     background-color: rgb(21, 119, 73);
 }
 
@@ -45,3 +64,39 @@
     width: 100%;
     height: auto;
 }
+
+.loaderContainer {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Batman Loader */
+.batmanLoader {
+    width: 72px;
+    height: 31.7px;
+    position: relative;
+    margin: 30px 60px;
+ }
+ 
+ .batmanLoader:before,
+ .batmanLoader:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #474bff;
+    box-shadow: 0 0 0 36px #474bff;
+    clip-path: polygon(-36px -14.4px,10% -8.6px,20% 0,calc(50% - 11.5px) 0,calc(50% - 7.2px) -14.4px,calc(50% - 5.8px) -11.5px,calc(50% + 5.8px) -11.5px,calc(50% + 7.2px) -14.4px,calc(50% + 11.5px) 0,80% 0,90% -8.6px,calc(100% + 36px) -14.4px,100% 80%,calc(100% + 7.2px) calc(100% + 7.2px),60% 100%,50% calc(100% + 11.5px),40% 100%,-7.2px calc(100% + 7.2px),0 80%);
+ }
+ 
+ .batmanLoader:after {
+    animation: pulse-ciavg0lg 1.2s infinite;
+    transform: perspective(216px) translateZ(0px);
+ }
+ 
+ @keyframes pulse-ciavg0lg {
+    to {
+       transform: perspective(216px) translateZ(72px);
+       opacity: 0;
+    }
+ }

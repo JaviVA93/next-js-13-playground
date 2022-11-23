@@ -1,54 +1,59 @@
 'use client'
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { MouseEventHandler, useRef, useState } from 'react';
 import styles from '../styles/gamesList.module.css';
 
+interface GameInfo {
+    "id": number,
+    "slug": string,
+    "name": string,
+    "released": string, // "2022-11-21",
+    "tba": boolean,
+    "background_image": string, // "http://example.com",
+    "rating": number,
+    "rating_top": number,
+    "ratings": {},
+    "ratings_count": number,
+    "reviews_text_count": string,
+    "added": number,
+    "added_by_status": {},
+    "metacritic": number,
+    "playtime": number,
+    "suggestions_count": number,
+    "updated": string,  // "2022-11-21T16:09:43Z",
+    "esrb_rating": {
+        "id": number,
+        "slug": string, // "everyone",
+        "name": string, // "Everyone"
+    },
+    "platforms": [
+        {
+            "platform": {},
+            "released_at": string,
+            "requirements": {}
+        }
+    ]
+}
 interface GamesPage {
     next: string,
     previous: string,
-    results: {
-        "id": number,
-        "slug": string,
-        "name": string,
-        "released": string, // "2022-11-21",
-        "tba": boolean,
-        "background_image": string, // "http://example.com",
-        "rating": number,
-        "rating_top": number,
-        "ratings": {},
-        "ratings_count": number,
-        "reviews_text_count": string,
-        "added": number,
-        "added_by_status": {},
-        "metacritic": number,
-        "playtime": number,
-        "suggestions_count": number,
-        "updated": string,  // "2022-11-21T16:09:43Z",
-        "esrb_rating": {
-            "id": number,
-            "slug": string, // "everyone",
-            "name": string, // "Everyone"
-        },
-        "platforms": [
-            {
-                "platform": {},
-                "released_at": string,
-                "requirements": {}
-            }
-        ]
-    }[]
+    results: GameInfo[]
 }
 
+
 export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
-    const [games, setGames] = useState(gamesPage.results);
+    const [games, setGames] = useState<GameInfo[] | null>(gamesPage.results);
     const previousPage = useRef(gamesPage.previous);
     const nextPage = useRef(gamesPage.next);
+    const sortType = useRef<string | null>(null);
 
     const loadNextPage = () => {
         const url = new URL(nextPage.current);
         const pageValue = url.searchParams.get('page');
         const pageParam = (pageValue) ? `page=${pageValue}` : '';
+
+        setGames(null);
         fetch(`/api/videogames?${pageParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
@@ -62,6 +67,8 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         const url = new URL(previousPage.current);
         const pageValue = url.searchParams.get('page');
         const pageParam = (pageValue) ? `page=${pageValue}` : '';
+
+        setGames(null);
         fetch(`/api/videogames?${pageParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
@@ -71,23 +78,74 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
                 }
             }));
     }
+    const sortBy = (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (!(event.target instanceof HTMLElement)) return;
 
-    const gameElements = games.map(g => {
+        const sortTypeAtt = event.target.getAttribute('sortType');
+        if (!sortTypeAtt) return;
+        
+        const metacriticParam = (sortTypeAtt === 'metacritic') ? 'metacritic=1,100' : '';
+
+        if (!sortType.current || !sortType.current.includes(sortTypeAtt)) sortType.current = sortTypeAtt;
+        else if (sortType.current.includes('-')) sortType.current = sortTypeAtt;
+        else sortType.current = '-' + sortTypeAtt;
+
+        setGames(null);
+
+        const sortParam = `ordering=${sortType.current}`;
+        fetch(`/api/videogames?${sortParam}&${metacriticParam}`)
+            .then(r => r.json().then((d: GamesPage | null) => {
+                if (d) {
+                    console.dir(d);
+                    previousPage.current = d.previous;
+                    nextPage.current = d.next;
+                    setGames(d.results);
+                }
+            }));
+    }
+
+    const gameElements = games?.map(g => {
         return (
             <div key={g.id} className={styles.gameCard}>
-                <Image src={g.background_image} alt={g.name} width={200} height={200} />
-                <span style={{ marginTop: 'auto' }}>{g.name}</span>
-                <span style={{ fontSize: '0.8rem' }}>Metacritic: {g.metacritic}</span>
+                {g.background_image ?
+                    <Image src={g.background_image} alt={(g.name) ? g.name : 'N/A'} width={200} height={200} />
+                    :
+                    ''
+                }
+                <span style={{ marginTop: 'auto' }}>{g.name ? g.name : 'N/A'}</span>
+                <span style={{ fontSize: '0.8rem' }}>Metacritic: {g.metacritic ? g.metacritic : 'N/A'}</span>
             </div>
         )
     });
+    const loadingDataElement =
+        <div className={styles.loaderContainer}>
+            Loading Data
+            <div className={styles.batmanLoader}></div>
+        </div>
     return (
         <div className={styles.container}>
+            <div className={styles.sortButtons}>
+                {/* @ts-ignore */}
+                <button sorttype="name" onClick={sortBy}>Name</button>
+                {/* @ts-ignore */}
+                <button sorttype="released" onClick={sortBy}>Released</button>
+                {/* @ts-ignore */}
+                <button sorttype="metacritic" onClick={sortBy}>Metacritic</button>
+            </div>
             <div className={styles.gamesGrid}>
-                {gameElements}
+                {games ?
+                    gameElements
+                    :
+                    loadingDataElement
+                }
             </div>
             <div className={styles.nextPrevButtons}>
-                <button onClick={loadPreviousPage}>Previous Page</button>
+                {!previousPage.current ?
+                    <button disabled>Previous Page</button>
+                    :
+                    <button onClick={loadPreviousPage}>Previous Page</button>
+                }
+
                 <button onClick={loadNextPage}>Next Page</button>
             </div>
         </div>
