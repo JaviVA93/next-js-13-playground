@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+.gamesGrid {
+    width: 100%;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.nextPrevButtons {
+    display: flex;
+    gap: 20px;
+}
+
+.nextPrevButtons button{
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgb(31, 168, 104);
+    border: 0;
+    border-radius: 5px;
+}
+
+.nextPrevButtons button:hover {
+    background-color: rgb(21, 119, 73);
+}
+
+.gameCard {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 5px;
+    background-color: rgb(83, 83, 83);
+
+    border-radius: 5px;
+}
+
+.gameCard img {
+    width: 100%;
+    height: auto;
+}
