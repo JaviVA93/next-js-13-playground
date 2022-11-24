@@ -65,15 +65,10 @@
 }
 
 .gameCard {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
     height: fit-content;
-
+    
     padding: 5px;
     background-color: rgb(83, 83, 83);
-
     border-radius: 8px;
 
     -webkit-box-shadow: -3.5px 3.5px 6px 0.5px #010101;
@@ -81,6 +76,12 @@
     box-shadow: -3.5px 3.5px 6px 0.5px #010101;
 
     transition: transform 1s  cubic-bezier(0.000, 0.455, 0.105, 0.940);
+}
+
+.gameCard a {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .gameCard:hover {
