@@ -31,6 +31,6 @@ main {
   }
   body {
     color: white;
-    background: black;
+    background: rgb(34, 34, 34);
   }
 }
