@@ -47,6 +47,16 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
     const previousPage = useRef(gamesPage.previous);
     const nextPage = useRef(gamesPage.next);
     const sortType = useRef<string | null>(null);
+    const sortButtonsContainer = useRef<HTMLDivElement>(null)
+
+    const clearSelectedSortButton = () => {
+        // TO-DO:
+        // THE REFERENCE TO THE BUTTONS CONTAINER IS NOT WORKING
+        console.log('sortButtonsContainer',sortButtonsContainer.current)
+        if (!sortButtonsContainer.current) return;
+        sortButtonsContainer.current.querySelector('button[selected]')?.removeAttribute('selected');
+        sortButtonsContainer.current.querySelector('button[ordering]')?.removeAttribute('ordering');
+    }
 
     const loadNextPage = () => {
         const url = new URL(nextPage.current);
@@ -84,11 +94,21 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         const sortTypeAtt = event.target.getAttribute('sortType');
         if (!sortTypeAtt) return;
         
-        const metacriticParam = (sortTypeAtt === 'metacritic') ? 'metacritic=1,100' : '';
+        console.log(event.target.getAttribute('ordering'));
+        console.log(event.target.getAttribute('selected'))
+        if (event.target.getAttribute('selected') !== null)
+            if (event.target.getAttribute('ordering') === 'asc')
+                event.target.setAttribute('ordering', 'desc')
+            else
+                event.target.setAttribute('ordering', 'asc')
+        else {
+            clearSelectedSortButton();
+            event.target.setAttribute('selected', '');
+            event.target.setAttribute('ordering', 'asc');
+        }
 
-        if (!sortType.current || !sortType.current.includes(sortTypeAtt)) sortType.current = sortTypeAtt;
-        else if (sortType.current.includes('-')) sortType.current = sortTypeAtt;
-        else sortType.current = '-' + sortTypeAtt;
+        const metacriticParam = (sortTypeAtt === 'metacritic') ? 'metacritic=1,100' : '';
+        sortType.current = (event.target.getAttribute('ordering') === 'asc') ? sortTypeAtt : `-${sortTypeAtt}`;
 
         setGames(null);
 
@@ -113,6 +133,7 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
                     ''
                 }
                 <span style={{ marginTop: 'auto' }}>{g.name ? g.name : 'N/A'}</span>
+                <span style={{ fontSize: '0.8rem' }}>Released: {g.released ? g.released : 'N/A'}</span>
                 <span style={{ fontSize: '0.8rem' }}>Metacritic: {g.metacritic ? g.metacritic : 'N/A'}</span>
             </div>
         )
@@ -124,7 +145,7 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         </div>
     return (
         <div className={styles.container}>
-            <div className={styles.sortButtons}>
+            <div className={styles.sortButtons} ref={sortButtonsContainer}>
                 {/* @ts-ignore */}
                 <button sorttype="name" onClick={sortBy}>Name</button>
                 {/* @ts-ignore */}
