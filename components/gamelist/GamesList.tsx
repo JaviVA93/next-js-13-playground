@@ -58,6 +58,7 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         if (!sortButtonsContainer.current) return;
         sortButtonsContainer.current.querySelector('button[selected]')?.removeAttribute('selected');
         sortButtonsContainer.current.querySelector('button[ordering]')?.removeAttribute('ordering');
+        sortType.current = null;
     }
 
     const loadNextPage = () => {
@@ -65,8 +66,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         const pageValue = url.searchParams.get('page');
         const pageParam = (pageValue) ? `page=${pageValue}` : '';
 
+        const sortParam = (sortType.current) ? `&ordering=${sortType.current}` : '';
+        const metacriticParam = (sortType.current?.includes('metacritic')) ? '&metacritic=1,100' : '';
+
         setGames(null);
-        fetch(`/api/videogames?${pageParam}`)
+        fetch(`/api/videogames?${pageParam}${sortParam}${metacriticParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
                     previousPage.current = d.previous;
@@ -80,8 +84,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         const pageValue = url.searchParams.get('page');
         const pageParam = (pageValue) ? `page=${pageValue}` : '';
 
+        const sortParam = (sortType.current) ? `&ordering=${sortType.current}` : '';
+        const metacriticParam = (sortType.current?.includes('metacritic')) ? '&metacritic=1,100' : '';
+
         setGames(null);
-        fetch(`/api/videogames?${pageParam}`)
+        fetch(`/api/videogames?${pageParam}${sortParam}${metacriticParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
                     previousPage.current = d.previous;
