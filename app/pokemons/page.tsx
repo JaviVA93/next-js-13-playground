@@ -1,5 +1,5 @@
-import PokemonGenerator from "../../components/PokemonGenerator";
-import PokemonList from "../../components/PokemonList";
+import PokemonGenerator from "../../components/pokemon-generator/PokemonGenerator";
+import PokemonList from "../../components/pokemon-list/PokemonList";
 
 const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
     const req = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=10000', { next: { revalidate: 60*60*24 } });

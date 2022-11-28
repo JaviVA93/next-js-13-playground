@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import styles from '../styles/clock.module.css';
+import styles from './clock.module.css';
 
 export default function Clock() {
 

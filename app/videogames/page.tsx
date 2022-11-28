@@ -1,4 +1,4 @@
-import GamesList from '../../components/gamelist/GamesList';
+import GamesList from '../../components/game-list/GamesList';
 
 interface GamesPage {
     next: string,

@@ -1,5 +1,5 @@
-import Clock from '../../components/Clock';
-import Pomodoro from '../../components/Pomodoro';
+import Clock from '../../components/clock/Clock';
+import Pomodoro from '../../components/pomodoro/Pomodoro';
 import styles from '../../styles/clockPage.module.css';
 
 

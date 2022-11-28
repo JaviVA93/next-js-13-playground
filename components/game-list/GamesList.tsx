@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEventHandler, useRef, useState } from 'react';
-import GameCard from '../gamecard/GameCard';
+import GameCard from '../game-card/GameCard';
 import styles from './gamesList.module.css';
 
 interface GameInfo {

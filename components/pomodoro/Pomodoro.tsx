@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/pomodoro.module.css";
-import PlayButtonSvg from "./assets/PlayButtonSvg";
-import PauseButtonSvg from "./assets/PauseButtonSvg";
-import StopButtonSvg from "./assets/StopButtonSvg";
+import styles from "./pomodoro.module.css";
+import PlayButtonSvg from "../assets/PlayButtonSvg";
+import PauseButtonSvg from "../assets/PauseButtonSvg";
+import StopButtonSvg from "../assets/StopButtonSvg";
 
 export default function Pomodoro() {
     interface PomoTimeInterface {
