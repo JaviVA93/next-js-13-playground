@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import GamesList from '../../components/GamesList';
+import GamesList from '../../components/gamelist/GamesList';
 import styles from '../../styles/videogamesPage.module.css';
 
 interface GamesPage {

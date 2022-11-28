@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEventHandler, useRef, useState } from 'react';
-import styles from '../styles/gamesList.module.css';
+import GameCard from '../gamecard/GameCard';
+import styles from './gamesList.module.css';
 
 interface GameInfo {
     "id": number,
@@ -127,18 +128,8 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
 
     const gameElements = games?.map(g => {
         return (
-            <div key={g.id} className={styles.gameCard}>
-                <Link href={`/videogames/${g.slug}/`}>
-                    {g.background_image ?
-                        <Image src={g.background_image} alt={(g.name) ? g.name : 'N/A'} width={200} height={200} />
-                        :
-                        ''
-                    }
-                    <span style={{ marginTop: 'auto' }}>{g.name ? g.name : 'N/A'}</span>
-                    <span style={{ fontSize: '0.8rem' }}>Released: {g.released ? g.released : 'N/A'}</span>
-                    <span style={{ fontSize: '0.8rem' }}>Metacritic: {g.metacritic ? g.metacritic : 'N/A'}</span>
-                </Link>
-            </div>
+            <GameCard key={g.id} gameid={g.id} name={g.name} imageUrl={g.background_image} metacritic={g.metacritic} 
+                releaseDate={g.released} slug={g.slug} />
         )
     });
     const loadingDataElement =
