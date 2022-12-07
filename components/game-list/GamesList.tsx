@@ -144,6 +144,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
             Loading Data
             <div className={styles.batmanLoader}></div>
         </div>
+
+    const loadingDataSkeleton = Array(12).map((v, i) => {
+        return <GameCard key={`skeleton-${i}`} gameid={null} name={null} imageUrl={null} metacritic={null} 
+            releaseDate={null} slug={null} />
+    });
     return (
         <div className={styles.container}>
             <div className={styles.sortButtons} ref={sortButtonsContainer}>
@@ -158,7 +163,8 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
                 {games ?
                     gameElements
                     :
-                    loadingDataElement
+                    // loadingDataElement
+                    loadingDataSkeleton
                 }
             </div>
             <div className={styles.nextPrevButtons}>

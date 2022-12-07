@@ -35,9 +35,7 @@ export default function Pomodoro() {
 
 
     function requestNotificatinoPermission() {
-        console.log('requesting notification permission')
         let notifPermission = getNotificationPermission();
-        console.dir(notifPermission)
         if (notifPermission !== 'default')
             return;
     
@@ -145,12 +143,9 @@ export default function Pomodoro() {
     }
 
     const startPauseResumePomodoro = () => {
-        console.log('startPauseResumePomodoro')
-        console.dir(pomo_vars.current)
         if (pomo_vars.current.status === 'running') {
             pomo_vars.current.status = 'pause';
             setPlayPauseButtonBackground('play');
-            console.log('Pausing pomo')
             if (pomoInterval.current) clearInterval(pomoInterval.current);
         }
         else {

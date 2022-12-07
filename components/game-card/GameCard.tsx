@@ -3,12 +3,12 @@ import styles from './gameCard.module.css';
 import Image from 'next/image';
 
 interface GameCardData {
-    gameid: number,
+    gameid: number | null,
     name: string | null,
-    imageUrl: string,
+    imageUrl: string | null,
     metacritic: number | null,
     releaseDate: string | null,
-    slug: string
+    slug: string | null
 }
 
 

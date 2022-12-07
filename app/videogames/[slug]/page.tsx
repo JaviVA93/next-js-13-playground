@@ -1,3 +1,4 @@
+import { json } from 'stream/consumers';
 import styles from '../../../styles/gamePage.module.css';
 
 interface GameDetails {
@@ -83,13 +84,48 @@ const getGameDetails = async (slug: string): Promise<GameDetails | null> => {
     }
 }
 
+const getGameScreenshots = async (slug: string): Promise<GameDetails | null> => {
+    try {
+        const apiKey = process.env.RAWG_API_KEY || '';
+        const req = await fetch(`https://api.rawg.io/api/games/${slug}?key=${apiKey}`, {
+            next: {
+                revalidate: 60 * 60 * 24
+            }
+        });
+        const data = await req.json();
+        return data.results || null;
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
+const getGameTrailers = async (slug: string): Promise<{id: number, name: string, preview: string, data: any}[] | null> => {
+    try {
+        const apiKey = process.env.RAWG_API_KEY || '';
+        const req = await fetch(`https://api.rawg.io/api/games/${slug}/movies?key=${apiKey}`, {
+            next: {
+                revalidate: 60 * 60 * 24
+            }
+        });
+        const data = await req.json();
+        return data.results || null;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+}
+
 const errorLayout = <div>
     <h3>Error loading game </h3>
 </div>
 
 export default async function VideogamesListPage({ params }: { params: any }) {
-    const { id }: { id: string } = params;
-    const gameDetails = await getGameDetails(id);
+    const { slug }: { slug: string } = params;
+    // const gameDetails = await getGameDetails(slug);
+    // const gameTrailers = await getGameTrailers(slug);
+    const [gameDetails, gameTrailers] = await Promise.all([getGameDetails(slug), getGameTrailers(slug)]);
+    console.dir(gameTrailers);
 
     const gameDetailsLayout = gameDetails ?
         <div>
@@ -98,6 +134,11 @@ export default async function VideogamesListPage({ params }: { params: any }) {
                 <span dangerouslySetInnerHTML={{__html: gameDetails.description}}></span>
             </div>
         </div>
+        : '';
+    const videoElement = gameTrailers && gameTrailers.length > 0 ?
+        <video controls className={styles.videoElement}>
+            <source src={gameTrailers[0].data.max} type="video/mp4" />
+        </video>
         : '';
 
     return (
@@ -108,6 +149,7 @@ export default async function VideogamesListPage({ params }: { params: any }) {
                     :
                     errorLayout
             }
+            {videoElement}
         </div>
     )
 }
