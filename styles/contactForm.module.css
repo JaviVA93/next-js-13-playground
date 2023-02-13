@@ -1,0 +1,43 @@
+.formWrapper {
+    width: 100%;
+    background: rgb(31, 168, 104);
+    border-radius: 20px;
+    padding: 20px;
+}
+.formStep form{
+    display: flex;
+    flex-wrap: wrap;
+}
+.formStep form label {
+    display: flex;
+    flex-direction: column;
+}
+.labelName {
+    width: 40%;
+    min-width: 350px;
+}
+.labelEmail {
+    width: 40%;
+    min-width: 350px;
+}
+.labelMessage {
+    width: 100%;
+}
+.formStep form input {
+    border: 0;
+    border-radius: 10px;
+    padding: 15px 10px;
+    min-width: 40%;
+}
+.formStep form textarea {
+    padding: 15px 10px;
+    min-height: 100px;
+    border-radius: 10px;
+    width: 100%;
+}
+.formStep button[type=submit] {
+    border: 2px solid;
+    padding: 10px 30px;
+    border-radius: 20px;
+    width: fit-content;
+}
