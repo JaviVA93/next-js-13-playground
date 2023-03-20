@@ -83,19 +83,16 @@ export default function ContactForm() {
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
           {errors.name && <span style={{ color: "red" }}>{errors.name}</span>}
         </label>
-        <br />
         <label className={styles.labelEmail}>
           Email:
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
           {errors.email && <span style={{ color: "red" }}>{errors.email}</span>}
         </label>
-        <br />
         <label className={styles.labelMessage}>
           Message:
           <textarea name="message" value={formData.message} onChange={handleChange} />
           {errors.message && <span style={{ color: "red" }}>{errors.message}</span>}
         </label>
-        <br />
         <button type="submit">Send</button>
       </form>
     </div>;

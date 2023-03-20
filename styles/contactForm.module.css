@@ -1,12 +1,15 @@
 .formWrapper {
     width: 100%;
     background: rgb(31, 168, 104);
-    border-radius: 20px;
+    border-radius: 8px;
     padding: 20px;
+    margin: 15px 0;
 }
-.formStep form{
+.formStep form {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
 }
 .formStep form label {
     display: flex;
@@ -25,14 +28,14 @@
 }
 .formStep form input {
     border: 0;
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 15px 10px;
     min-width: 40%;
 }
 .formStep form textarea {
     padding: 15px 10px;
     min-height: 100px;
-    border-radius: 10px;
+    border-radius: 6px;
     width: 100%;
 }
 .formStep button[type=submit] {

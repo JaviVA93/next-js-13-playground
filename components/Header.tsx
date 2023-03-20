@@ -14,6 +14,9 @@ const links = [
     }, {
       label: 'Videogames',
       route: '/videogames'
+    }, {
+      label: 'Contact',
+      route: '/contact'
     },    
   ]
 
