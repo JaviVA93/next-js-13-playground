@@ -41,6 +41,7 @@ interface GamesPage {
 async function getFirstGamePage(apiKey: string): Promise<GamesPage | null> {
     try {
         const req = await fetch(`https://api.rawg.io/api/games?key=${apiKey}`, {
+        // const req = await fetch('/api/videogames', {
             next: {
                 revalidate: 60 * 60 * 24
             }
