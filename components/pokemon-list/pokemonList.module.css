@@ -12,14 +12,13 @@
 
 .pagination li {
     cursor: pointer;
+    font-size: 16px;
+    transition: font-size 0.25s;
 }
 
 .pagination li[selected] {
-    text-decoration: underline;
-}
-
-.pagination li:hover {
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .pokemonList {
@@ -34,6 +33,10 @@
 
 .pokemonList li > span {
     margin-right: 5px;
+}
+
+.pokemonList li a {
+    transition: font-size 0.25s;
 }
 
 .pokemonList li a:hover{

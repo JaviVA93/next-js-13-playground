@@ -22,13 +22,14 @@
     font-size: 1rem;
     text-decoration: none;
     padding: 10px 20px;
-    background-color: rgb(83, 83, 83);
+    color: black;
+    background-color: #9cf6cf;
     border: 1px solid rgb(31, 168, 104);
     border-radius: 5px;
 }
 
 .sortButtons button[selected] {
-    background-color: rgb(16, 94, 57);
+    border-width: 3px;
 }
 
 .sortButtons button[ordering="asc"]::after {
@@ -51,8 +52,9 @@
     font-size: 1rem;
     text-decoration: none;
     padding: 10px 20px;
-    background-color: rgb(31, 168, 104);
-    border: 0;
+    color: black;
+    background-color: #5fe9ad;
+    border: 1px solid rgb(31, 168, 104);
     border-radius: 5px;
 }
 

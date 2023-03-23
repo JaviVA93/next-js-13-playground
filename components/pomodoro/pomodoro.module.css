@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #e476bf;
 }
 
 .pomoCard {
@@ -9,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    background-color: rgb(31, 168, 104);
+    background-color: #9cf6cf;
     padding: 15px;
     border-radius: 5px;
 }
@@ -21,7 +22,7 @@
 
 .pomoCard button {
     border: unset;
-    background-color: rgb(31, 168, 104);
+    background-color: #9cf6cf;
 }
 
 .pomBtnsWrapper {

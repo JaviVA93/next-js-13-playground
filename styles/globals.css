@@ -3,7 +3,6 @@ body {
   height: 100vh;
   padding: 0;
   margin: 0;
-  font-family: 'Cinzel', serif;
 }
 
 a {
@@ -31,6 +30,6 @@ main {
   }
   body {
     color: white;
-    background: rgb(34, 34, 34);
+    background: #e9a996;
   }
 }

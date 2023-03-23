@@ -2,12 +2,13 @@
     height: fit-content;
     
     padding: 5px;
-    background-color: rgb(83, 83, 83);
+    background-color: #ffffff;
+    color: black;
     border-radius: 8px;
 
-    -webkit-box-shadow: -3.5px 3.5px 6px 0.5px #010101;
-    -moz-box-shadow: -3.5px 3.5px 6px 0.5px #010101;
-    box-shadow: -3.5px 3.5px 6px 0.5px #010101;
+    -webkit-box-shadow: 3px 3px 6px 4px #00000057;;
+    -moz-box-shadow: 3px 3px 6px 4px #00000057;;
+    box-shadow: 3px 3px 6px 4px #00000057;;
 
     transition: transform 1s  cubic-bezier(0.000, 0.455, 0.105, 0.940);
 }

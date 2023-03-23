@@ -9,10 +9,10 @@ type Pokemon = {
 
 const getPokemon = async (pokemonUrl: string): Promise<Pokemon | null> => {
     try {
-        const pokemonsFetch = await fetch(pokemonUrl, { 
-            next: { 
-                revalidate: 60*60*24 
-            } 
+        const pokemonsFetch = await fetch(pokemonUrl, {
+            next: {
+                revalidate: 60 * 60 * 24
+            }
         });
         const pokemonData = await pokemonsFetch.json();
         const pokemonType = pokemonData.types.map(
@@ -30,9 +30,9 @@ const getPokemon = async (pokemonUrl: string): Promise<Pokemon | null> => {
     }
 }
 
-export default async function PokemonGenerator({pokemonList}: {pokemonList: any[]}) {
+export default async function PokemonGenerator({ pokemonList }: { pokemonList: any[] }) {
     const randomId = Math.floor(Math.random() * (pokemonList.length - 1) + 1);
-    
+
     const pokemon = await getPokemon(pokemonList[randomId].url);
     return (
         <div className={styles.container}>
@@ -42,10 +42,16 @@ export default async function PokemonGenerator({pokemonList}: {pokemonList: any[
                 :
                 <div className={styles.pokemonInfo}>
                     <Image src={pokemon.imageUrl} alt={pokemon.name} width={200} height={200} />
-                    <span>Name:</span>
-                    <span>{pokemon.name}</span>
-                    <span>Type:</span>
-                    <span>{pokemon.type}</span>
+                    <div>
+                        <div className={styles.infoInline}>
+                            <span>Name:</span>
+                            <span>{pokemon.name}</span>
+                        </div>
+                        <div className={styles.infoInline}>
+                            <span>Type:</span>
+                            <span>{pokemon.type}</span>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
