@@ -1,13 +1,10 @@
 import Link from "next/link"
-import styles from '../styles/header.module.css'
+import styles from './header.module.css'
 
 const links = [
     {
       label: 'Home',
       route: '/'
-    }, {
-      label: 'Clock',
-      route: '/clock'
     }, {
       label: 'Pokemons',
       route: '/pokemons'
@@ -25,13 +22,15 @@ export function Header () {
         <header className={styles.header}>
           <nav>
             <ul>
-              {links.map(({label, route}) => { return (
-                <li key={route}>
-                  <Link href={route}>
-                    {label}
-                  </Link>
-                </li>
-              )})}
+              {links.map(({label, route}) => { 
+                return (
+                  <li key={route}>
+                    <Link href={route}>
+                      {label}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </nav>
         </header>

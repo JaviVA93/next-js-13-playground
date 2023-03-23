@@ -1,8 +1,10 @@
 'use client'
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { MouseEventHandler, useRef, useState } from 'react';
-import styles from '../styles/gamesList.module.css';
+import GameCard from '../game-card/GameCard';
+import styles from './gamesList.module.css';
 
 interface GameInfo {
     "id": number,
@@ -52,10 +54,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
     const clearSelectedSortButton = () => {
         // TO-DO:
         // THE REFERENCE TO THE BUTTONS CONTAINER IS NOT WORKING
-        console.log('sortButtonsContainer',sortButtonsContainer.current)
+        console.log('sortButtonsContainer', sortButtonsContainer.current)
         if (!sortButtonsContainer.current) return;
         sortButtonsContainer.current.querySelector('button[selected]')?.removeAttribute('selected');
         sortButtonsContainer.current.querySelector('button[ordering]')?.removeAttribute('ordering');
+        sortType.current = null;
     }
 
     const loadNextPage = () => {
@@ -63,8 +66,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         const pageValue = url.searchParams.get('page');
         const pageParam = (pageValue) ? `page=${pageValue}` : '';
 
+        const sortParam = (sortType.current) ? `&ordering=${sortType.current}` : '';
+        const metacriticParam = (sortType.current?.includes('metacritic')) ? '&metacritic=1,100' : '';
+
         setGames(null);
-        fetch(`/api/videogames?${pageParam}`)
+        fetch(`/api/videogames?${pageParam}${sortParam}${metacriticParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
                     previousPage.current = d.previous;
@@ -78,8 +84,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
         const pageValue = url.searchParams.get('page');
         const pageParam = (pageValue) ? `page=${pageValue}` : '';
 
+        const sortParam = (sortType.current) ? `&ordering=${sortType.current}` : '';
+        const metacriticParam = (sortType.current?.includes('metacritic')) ? '&metacritic=1,100' : '';
+
         setGames(null);
-        fetch(`/api/videogames?${pageParam}`)
+        fetch(`/api/videogames?${pageParam}${sortParam}${metacriticParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
                     previousPage.current = d.previous;
@@ -133,16 +142,8 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
 
     const gameElements = games?.map(g => {
         return (
-            <div key={g.id} className={styles.gameCard}>
-                {g.background_image ?
-                    <Image src={g.background_image} alt={(g.name) ? g.name : 'N/A'} width={200} height={200} />
-                    :
-                    ''
-                }
-                <span style={{ marginTop: 'auto' }}>{g.name ? g.name : 'N/A'}</span>
-                <span style={{ fontSize: '0.8rem' }}>Released: {g.released ? g.released : 'N/A'}</span>
-                <span style={{ fontSize: '0.8rem' }}>Metacritic: {g.metacritic ? g.metacritic : 'N/A'}</span>
-            </div>
+            <GameCard key={g.id} gameid={g.id} name={g.name} imageUrl={g.background_image} metacritic={g.metacritic} 
+                releaseDate={g.released} slug={g.slug} />
         )
     });
     const loadingDataElement =
@@ -150,6 +151,11 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
             Loading Data
             <div className={styles.batmanLoader}></div>
         </div>
+
+    const loadingDataSkeleton = Array(12).map((v, i) => {
+        return <GameCard key={`skeleton-${i}`} gameid={null} name={null} imageUrl={null} metacritic={null} 
+            releaseDate={null} slug={null} />
+    });
     return (
         <div className={styles.container}>
             <div className={styles.sortButtons} ref={sortButtonsContainer}>
@@ -164,7 +170,8 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
                 {games ?
                     gameElements
                     :
-                    loadingDataElement
+                    // loadingDataElement
+                    loadingDataSkeleton
                 }
             </div>
             <div className={styles.nextPrevButtons}>

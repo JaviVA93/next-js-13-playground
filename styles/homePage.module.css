@@ -9,14 +9,14 @@
   font-weight: 900;
 }
 
+.container section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
 @media (prefers-color-scheme: dark) {
-  .title {
-    background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
   .card,
   .footer {
     border-color: #222;

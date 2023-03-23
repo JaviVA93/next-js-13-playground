@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import styles from '../styles/contactForm.module.css';
+import styles from './contactForm.module.css';
 
 
 export default function ContactForm() {
@@ -36,21 +36,21 @@ export default function ContactForm() {
     if (formData.name.trim().length === 0) {
       setErrors({
         ...errors,
-        name: "Name is required"
+        name: "*Name is required"
       });
       valid = false;
     }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
       setErrors({
         ...errors,
-        email: "Email is invalid"
+        email: "*Email is invalid"
       });
       valid = false;
     }
     else if (formData.message.trim().length === 0) {
       setErrors({
         ...errors,
-        message: "Message is required"
+        message: "*Message is required"
       });
       valid = false;
     }
@@ -81,17 +81,17 @@ export default function ContactForm() {
         <label className={styles.labelName}>
           Name:
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
-          {errors.name && <span style={{ color: "red" }}>{errors.name}</span>}
+          {errors.name && <span className={styles.errorMsg}>{errors.name}</span>}
         </label>
         <label className={styles.labelEmail}>
           Email:
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
-          {errors.email && <span style={{ color: "red" }}>{errors.email}</span>}
+          {errors.email && <span className={styles.errorMsg}>{errors.email}</span>}
         </label>
         <label className={styles.labelMessage}>
           Message:
           <textarea name="message" value={formData.message} onChange={handleChange} />
-          {errors.message && <span style={{ color: "red" }}>{errors.message}</span>}
+          {errors.message && <span className={styles.errorMsg}>{errors.message}</span>}
         </label>
         <button type="submit">Send</button>
       </form>

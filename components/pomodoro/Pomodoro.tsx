@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/pomodoro.module.css";
-import PlayButtonSvg from "./assets/PlayButtonSvg";
-import PauseButtonSvg from "./assets/PauseButtonSvg";
-import StopButtonSvg from "./assets/StopButtonSvg";
+import styles from "./pomodoro.module.css";
+import PlayButtonSvg from "../assets/PlayButtonSvg";
+import PauseButtonSvg from "../assets/PauseButtonSvg";
+import StopButtonSvg from "../assets/StopButtonSvg";
 
 export default function Pomodoro() {
     interface PomoTimeInterface {
@@ -28,16 +28,18 @@ export default function Pomodoro() {
         },
         lastUpdateTimestamp: 0,
     });
+
+    const playButtonSvg = PlayButtonSvg({ fillColor: '#e476bf'}),
+        pauseButtonSvg = PauseButtonSvg({fillColor: '#e476bf'});
+
     const pomoAlarm = useRef<HTMLAudioElement | null>(null)
     const [pomoTime, setPomoTime] = useState('00:00');
-    const [playPauseButtonIcon, setPlayPauseButtonIcon] = useState(PlayButtonSvg);
+    const [playPauseButtonIcon, setPlayPauseButtonIcon] = useState(playButtonSvg);
     const pomoInterval = useRef<NodeJS.Timer | null>(null)
 
 
     function requestNotificatinoPermission() {
-        console.log('requesting notification permission')
         let notifPermission = getNotificationPermission();
-        console.dir(notifPermission)
         if (notifPermission !== 'default')
             return;
     
@@ -62,9 +64,9 @@ export default function Pomodoro() {
     function setPlayPauseButtonBackground(value: string) {
         try {
             if (value === 'play')
-                setPlayPauseButtonIcon(PlayButtonSvg);
+                setPlayPauseButtonIcon(playButtonSvg);
             else if (value === 'pause')
-                setPlayPauseButtonIcon(PauseButtonSvg);
+                setPlayPauseButtonIcon(pauseButtonSvg);
             else
                 throw 'setPlayPauseButtonBackground: value is no valid.';
         } catch (e) {
@@ -145,12 +147,9 @@ export default function Pomodoro() {
     }
 
     const startPauseResumePomodoro = () => {
-        console.log('startPauseResumePomodoro')
-        console.dir(pomo_vars.current)
         if (pomo_vars.current.status === 'running') {
             pomo_vars.current.status = 'pause';
             setPlayPauseButtonBackground('play');
-            console.log('Pausing pomo')
             if (pomoInterval.current) clearInterval(pomoInterval.current);
         }
         else {
@@ -201,7 +200,7 @@ export default function Pomodoro() {
                 </button>
                 <button id="pomo-stop" onClick={stopPomodoro} aria-label="Stop pomodoro"
                     style={{ width: 50, height: 50 }}>
-                    <StopButtonSvg />
+                    <StopButtonSvg fillColor="#e476bf"/>
                 </button>
             </div >
         </div >

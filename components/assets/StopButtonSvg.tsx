@@ -1,4 +1,4 @@
-export default function StopButtonsvg() {
+export default function StopButtonsvg(props: {fillColor: string}) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export default function StopButtonsvg() {
             textRendering="geometricPrecision"
             imageRendering="optimizeQuality"
             fillRule="evenodd"
-            fill="#ffffff"
+            fill={props.fillColor}
             clipRule="evenodd"
             viewBox="0 0 512 511.99"
         >

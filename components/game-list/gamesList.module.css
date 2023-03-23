@@ -22,13 +22,14 @@
     font-size: 1rem;
     text-decoration: none;
     padding: 10px 20px;
-    background-color: rgb(83, 83, 83);
+    color: black;
+    background-color: #9cf6cf;
     border: 1px solid rgb(31, 168, 104);
     border-radius: 5px;
 }
 
 .sortButtons button[selected] {
-    background-color: rgb(16, 94, 57);
+    border-width: 3px;
 }
 
 .sortButtons button[ordering="asc"]::after {
@@ -44,14 +45,16 @@
 .nextPrevButtons {
     display: flex;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .nextPrevButtons button {
     font-size: 1rem;
     text-decoration: none;
     padding: 10px 20px;
-    background-color: rgb(31, 168, 104);
-    border: 0;
+    color: black;
+    background-color: #5fe9ad;
+    border: 1px solid rgb(31, 168, 104);
     border-radius: 5px;
 }
 
@@ -65,15 +68,10 @@
 }
 
 .gameCard {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
     height: fit-content;
-
+    
     padding: 5px;
     background-color: rgb(83, 83, 83);
-
     border-radius: 8px;
 
     -webkit-box-shadow: -3.5px 3.5px 6px 0.5px #010101;
@@ -81,6 +79,12 @@
     box-shadow: -3.5px 3.5px 6px 0.5px #010101;
 
     transition: transform 1s  cubic-bezier(0.000, 0.455, 0.105, 0.940);
+}
+
+.gameCard a {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .gameCard:hover {

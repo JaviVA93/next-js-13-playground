@@ -1,0 +1,77 @@
+.formWrapper {
+    width: 100%;
+    background-color: #d1595c;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+.formStep form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 18px;
+}
+.formStep form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+.labelName {
+    width: 40%;
+    min-width: 350px;
+}
+.labelEmail {
+    width: 40%;
+    min-width: 350px;
+}
+.labelMessage {
+    width: 100%;
+}
+.formStep form input {
+    border: 0;
+    font-size: 18px;
+    border-radius: 6px;
+    padding: 15px 10px;
+    min-width: 40%;
+    background-color: #bdb953;
+}
+.formStep form input:focus-visible {
+    outline: 0;
+}
+.formStep form textarea {
+    font-family: inherit;
+    font-size: 18px;
+    padding: 15px 10px;
+    min-height: 100px;
+    border-radius: 6px;
+    width: 100%;
+    background-color: #bdb953;
+}
+.formStep form textarea:focus-visible {
+    outline: 0;
+}
+.formStep button[type=submit] {
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    background-color: #f5c859;
+    border: 2px solid white;
+    padding: 10px 45px;
+    border-radius: 20px;
+    width: fit-content;
+    text-transform: uppercase;
+    transition: all 0.5s;
+}
+
+.formStep button[type=submit]:hover {
+    background-color: #8ccaf9;
+    border-color: #f5c859;
+    color: white;
+}
+
+.errorMsg {
+    color: #0df2f0;
+    text-shadow: 0 0 6px #0af44d;
+}

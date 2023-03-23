@@ -2,25 +2,17 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import styles from '../styles/pokemonList.module.css';
+import styles from './pokemonList.module.css';
 
 export default function PokemonList({ pokemonList }: { pokemonList: any }) {
-    // const [pokemonList, setPokemonList] = useState<[{ name: string, url: string }] | []>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    // const [pageNumbers, setPageNumbers] = useState<number[] | []>([]);
+    
     const pokemonsPerPage = 50;
     const pageNumbers = [];
     const aux = [];
     for (let i = 1; i <= Math.ceil(pokemonList.length / pokemonsPerPage); i++) {
         pageNumbers.push(i);
     }
-    
-
-    // const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
-    //     const req = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=10000', { next: { revalidate: 60*60*24 } });
-    //     const reqData = await req.json();
-    //     return reqData.results;
-    // }
 
     const cleanSelectedPageLi = (parent: Element) => {
         parent.querySelectorAll('li[selected]').forEach(e => {

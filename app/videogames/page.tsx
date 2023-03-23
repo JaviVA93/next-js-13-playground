@@ -1,6 +1,4 @@
-import Image from 'next/image'
-import GamesList from '../../components/GamesList';
-import styles from '../../styles/videogamesPage.module.css';
+import GamesList from '../../components/game-list/GamesList';
 
 interface GamesPage {
     next: string,
