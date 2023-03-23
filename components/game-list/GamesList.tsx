@@ -102,16 +102,6 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
 
         const sortTypeAtt = event.target.getAttribute('sortType');
         if (!sortTypeAtt) return;
-<<<<<<< HEAD:components/game-list/GamesList.tsx
-
-        console.log(event.target.getAttribute('ordering'));
-        console.log(event.target.getAttribute('selected'))
-        if (event.target.getAttribute('selected') !== null)
-            if (event.target.getAttribute('ordering') === 'asc')
-                event.target.setAttribute('ordering', 'desc');
-            else
-                clearSelectedSortButton();
-=======
         
         if (event.target.getAttribute('selected') !== null) {
             if (event.target.getAttribute('ordering') === 'desc')
@@ -124,7 +114,6 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
             else
                 event.target.setAttribute('ordering', 'desc')
         }
->>>>>>> main:components/GamesList.tsx
         else {
             clearSelectedSortButton();
             event.target.setAttribute('selected', '');
