@@ -1,13 +1,19 @@
 import { Header } from '../components/header/Header'
 import '../styles/globals.css'
+import { Source_Sans_Pro } from '@next/font/google'
+
+const sourceSansPro = Source_Sans_Pro({
+  weight: ['400', '600'],
+  subsets: ['latin']
+})
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&display=swap" rel="stylesheet" />
+        <meta charSet="UTF-8" />
       </head>
-      <body>
+      <body className={sourceSansPro.className}>
         <Header />
         <main>
           {children}
