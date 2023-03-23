@@ -102,6 +102,7 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
 
         const sortTypeAtt = event.target.getAttribute('sortType');
         if (!sortTypeAtt) return;
+<<<<<<< HEAD:components/game-list/GamesList.tsx
 
         console.log(event.target.getAttribute('ordering'));
         console.log(event.target.getAttribute('selected'))
@@ -110,22 +111,39 @@ export default function GamesList({ gamesPage }: { gamesPage: GamesPage }) {
                 event.target.setAttribute('ordering', 'desc');
             else
                 clearSelectedSortButton();
+=======
+        
+        if (event.target.getAttribute('selected') !== null) {
+            if (event.target.getAttribute('ordering') === 'desc')
+                event.target.setAttribute('ordering', 'asc')
+            else if (event.target.getAttribute('ordering') === 'asc') {
+                // UNSELECT SORT TYPE
+                event.target.removeAttribute('ordering');
+                event.target.removeAttribute('selected');
+            }
+            else
+                event.target.setAttribute('ordering', 'desc')
+        }
+>>>>>>> main:components/GamesList.tsx
         else {
             clearSelectedSortButton();
             event.target.setAttribute('selected', '');
-            event.target.setAttribute('ordering', 'asc');
+            event.target.setAttribute('ordering', 'desc');
         }
 
         const metacriticParam = (sortTypeAtt === 'metacritic') ? 'metacritic=1,100' : '';
-        sortType.current = (event.target.getAttribute('ordering') === 'asc') ? sortTypeAtt : `-${sortTypeAtt}`;
+        if (event.target.getAttribute('ordering') === null)
+            sortType.current = null;
+        else
+            sortType.current = (event.target.getAttribute('ordering') === 'asc') ? sortTypeAtt : `-${sortTypeAtt}`;
 
+        // Forcing loading step
         setGames(null);
 
         const sortParam = `ordering=${sortType.current}`;
         fetch(`/api/videogames?${sortParam}&${metacriticParam}`)
             .then(r => r.json().then((d: GamesPage | null) => {
                 if (d) {
-                    console.dir(d);
                     previousPage.current = d.previous;
                     nextPage.current = d.next;
                     setGames(d.results);

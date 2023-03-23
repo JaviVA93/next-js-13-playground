@@ -1,5 +1,22 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
+
+function cleanData(data: any) {
+    if (data.next) {
+        const cleanNextUrl = new URL(data.next);
+        cleanNextUrl.searchParams.delete('key')
+        data.next = cleanNextUrl.toString();
+    }
+
+    if (data.previous) {
+        const cleanPreviousUrl = new URL(data.previous);
+        cleanPreviousUrl.searchParams.delete('key');
+        data.previous = cleanPreviousUrl.toString();
+    }
+
+    return data;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const pageParam = (req.query.page) ? `&page=${req.query.page}` : '';
@@ -14,7 +31,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     }
                 });
         const data = await gamesReq.json();
-        res.status(200).json(data);
+        const cleanedData = cleanData(data)
+        res.status(200).json(cleanedData);
     } catch (e) {
         console.error(e);
         return null;
