@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import PokemonStats from '../../../components/pokemon-stats/PokemonStats';
 import styles from '../../../styles/pokemonStatsPage.module.css';
 
 interface PokemonStats {
@@ -44,35 +45,5 @@ export default async function pokemonInfo({ params }: { params: any }) {
     const { id } = params;
     const pokemonData = await getPokemon(id);
 
-    return (
-        <div className={styles.container}>
-            <h2>Pokemon Stats</h2>
-            {!pokemonData ?
-                <span>Error generating the pokemon, please refresh.</span>
-                :
-                <div className={styles.stats}>
-                    <Image src={pokemonData.imageUrl} alt={pokemonData.name} width={200} height={200} />
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Name:</td>
-                                <td>{pokemonData.name}</td>
-                            </tr>
-                            <tr>
-                                <td>Type:</td>
-                                <td>{pokemonData.type}</td>
-                            </tr>
-                            <tr>
-                                <td>Abilities</td>
-                                <td>{pokemonData.abilities}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            }
-            <Link href={'/pokemons'}>
-                <button>Go back</button>
-            </Link>
-        </div>
-    )
+    return <PokemonStats pokemonData={pokemonData} />
 }
