@@ -24,6 +24,14 @@ main {
   padding: 0 100px;
 }
 
+.floatLinkedin {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  right: 15px;
+  bottom: 20px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
