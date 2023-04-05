@@ -1,6 +1,7 @@
 import { Header } from '../components/header/Header'
 import '../styles/globals.css'
 import { Source_Sans_Pro } from "next/font/google"
+import LinkedinIconLink from '../components/assets/LinkedinIconLink'
 
 const sourceSansPro = Source_Sans_Pro({
   weight: ['400', '600'],
@@ -18,6 +19,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
         <main>
           {children}
         </main>
+        <LinkedinIconLink className="floatLinkedin"/>
       </body>
     </html>
   )
