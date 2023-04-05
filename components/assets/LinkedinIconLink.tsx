@@ -4,7 +4,7 @@ export default function LinkedinIconLink(props: any) {
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 16 16"
+                viewBox="2 2 12 12"
             >
                 <path
                     fill="#0A66C2"

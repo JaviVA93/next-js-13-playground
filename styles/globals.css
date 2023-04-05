@@ -24,12 +24,17 @@ main {
   padding: 0 100px;
 }
 
-.floatLinkedin {
-  width: 40px;
-  height: 40px;
+.floatLinkIcons {
   position: fixed;
+  display: flex;
+  gap: 8px;
   right: 15px;
   bottom: 20px;
+}
+
+.floatLinkIcons a {
+  width: 30px;
+  height: 30px;
 }
 
 @media (prefers-color-scheme: dark) {
