@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import styles from './pokemonGenerator.module.css';
+import { Pokemon } from '../../types'
 
-type Pokemon = {
-    name: string,
-    type: string,
-    imageUrl: string,
+
+const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
+    const req = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=10000', { next: { revalidate: 60*60*24 } });
+    const reqData = await req.json();
+    return reqData.results;
 }
 
 const getPokemon = async (pokemonUrl: string): Promise<Pokemon | null> => {
@@ -30,7 +32,14 @@ const getPokemon = async (pokemonUrl: string): Promise<Pokemon | null> => {
     }
 }
 
-export default async function PokemonGenerator({ pokemonList }: { pokemonList: any[] }) {
+export default async function PokemonGenerator() {
+
+    await new Promise(resolve => {
+        setTimeout(() => resolve(true), 2000);
+    });
+
+    const pokemonList = await getPokemonsList();
+
     const randomId = Math.floor(Math.random() * (pokemonList.length - 1) + 1);
 
     const pokemon = await getPokemon(pokemonList[randomId].url);

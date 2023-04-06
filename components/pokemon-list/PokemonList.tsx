@@ -4,8 +4,19 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from './pokemonList.module.css';
 
-export default function PokemonList({ pokemonList }: { pokemonList: any }) {
+const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
+    const req = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=10000', { next: { revalidate: 60*60*24 } });
+    const reqData = await req.json();
+    return reqData.results;
+}
+
+export default function PokemonList() {
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [pokemonList, setPokemonList] = useState<any[]>([]);
+    useEffect(() => {
+        getPokemonsList().then(r => setPokemonList(r))
+    }, [])
+
     
     const pokemonsPerPage = 50;
     const pageNumbers = [];

@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import PokemonGenerator from "../../components/pokemon-generator/PokemonGenerator";
+import PokemonGeneratorPlaceholder from '../../components/pokemon-generator/PokemonGeneratorPlaceholder'
 import PokemonList from "../../components/pokemon-list/PokemonList";
 
 const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
@@ -8,12 +10,17 @@ const getPokemonsList = async (): Promise<[{ name: string, url: string }]> => {
 }
 
 export default async function PokemonsPage() {
-    const pokemonList = await getPokemonsList();
+
+
     return (
         <div>
-            {/* @ts-expect-error Server Component */}
-            <PokemonGenerator pokemonList={pokemonList}/>
-            <PokemonList pokemonList={pokemonList}/>
+            <Suspense 
+                fallback={ <PokemonGeneratorPlaceholder /> }
+                >
+                {/* @ts-expect-error Server Component */}
+                <PokemonGenerator />
+            </Suspense>
+            <PokemonList />
         </div>
         
     )
